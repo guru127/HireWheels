@@ -1,6 +1,7 @@
 package com.updrad.hirewheels.entities;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Vehicle {
@@ -13,14 +14,21 @@ public class Vehicle {
     private long vehicleNumber;
     @Column(name = "color", length =50, nullable = false)
     private String color;
-    @Column(name = "location_id", length = 10,nullable = false)
-    private int locationId;
-    @Column(name = "fuel_type_id", length = 10,nullable = false)
-    private int fuelTypeId;
     @Column(nullable = false)
     private  boolean availabilityStatus;
     @Column(length = 500)
     private String vehicleImgUrl;
+    @ManyToOne
+    @JoinColumn(name = "vehicle_subcategory")
+    private VehicleSubcategory vehicleSubcategory;
+    @ManyToOne
+    @JoinColumn(name = "fuel_type")
+    private FuelType fuelType;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.EAGER)
+    private Set<Booking> bookings;
 
     public int getVehicleId() {
         return vehicleId;
@@ -54,22 +62,6 @@ public class Vehicle {
         this.color = color;
     }
 
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
-    public int getFuelTypeId() {
-        return fuelTypeId;
-    }
-
-    public void setFuelTypeId(int fuelTypeId) {
-        this.fuelTypeId = fuelTypeId;
-    }
-
     public boolean isAvailabilityStatus() {
         return availabilityStatus;
     }
@@ -86,6 +78,39 @@ public class Vehicle {
         this.vehicleImgUrl = vehicleImgUrl;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public VehicleSubcategory getVehicleSubcategory() {
+        return vehicleSubcategory;
+    }
+
+    public void setVehicleSubcategory(VehicleSubcategory vehicleSubcategory) {
+        this.vehicleSubcategory = vehicleSubcategory;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -93,10 +118,11 @@ public class Vehicle {
                 ", vehicleModel='" + vehicleModel + '\'' +
                 ", vehicleNumber=" + vehicleNumber +
                 ", color='" + color + '\'' +
-                ", locationId=" + locationId +
-                ", fuelTypeId=" + fuelTypeId +
                 ", availabilityStatus=" + availabilityStatus +
                 ", vehicleImgUrl='" + vehicleImgUrl + '\'' +
+                ", vehicleSubcategory=" + vehicleSubcategory +
+                ", fuelType=" + fuelType +
+                ", location=" + location +
                 '}';
     }
 }

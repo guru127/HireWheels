@@ -1,6 +1,7 @@
 package com.updrad.hirewheels.entities;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Users {
@@ -19,6 +20,12 @@ public class Users {
     private long mobileNo;
     @Column(length = 10)
     private int walletMoney;
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private Set<Booking> bookings;
+    @ManyToOne
+    @JoinColumn(name = "role" )
+    private Role role;
 
     public int getUserId() {
         return userId;
@@ -60,6 +67,22 @@ public class Users {
         this.email = email;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public long getMobileNo() {
         return mobileNo;
     }
@@ -86,6 +109,7 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", mobileNo=" + mobileNo +
                 ", walletMoney=" + walletMoney +
+                ", role=" + role +
                 '}';
     }
 }

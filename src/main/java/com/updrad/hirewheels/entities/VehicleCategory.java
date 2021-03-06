@@ -1,6 +1,7 @@
 package com.updrad.hirewheels.entities;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class VehicleCategory {
@@ -9,6 +10,8 @@ public class VehicleCategory {
     private int vehicleCategoryId;
     @Column(length = 50,nullable = false,unique = true)
     private  String VehicleCategoryName;
+    @OneToMany(mappedBy = "vehicleCategory")
+    private Set<VehicleSubcategory> vehicleSubcategory;
 
     public int getVehicleCategoryId() {
         return vehicleCategoryId;
@@ -24,6 +27,14 @@ public class VehicleCategory {
 
     public void setVehicleCategoryName(String vehicleCategoryName) {
         VehicleCategoryName = vehicleCategoryName;
+    }
+
+    public Set<VehicleSubcategory> getVehicleSubcategory() {
+        return vehicleSubcategory;
+    }
+
+    public void setVehicleSubcategory(Set<VehicleSubcategory> vehicleSubcategory) {
+        this.vehicleSubcategory = vehicleSubcategory;
     }
 
     @Override

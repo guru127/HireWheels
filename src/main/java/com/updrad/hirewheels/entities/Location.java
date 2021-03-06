@@ -1,5 +1,6 @@
 package com.updrad.hirewheels.entities;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Location {
@@ -13,6 +14,15 @@ public class Location {
     private String address;
     @Column(length = 10,nullable = false)
     private int pincode;
+
+    @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
+    private Set<Booking> bookings;
+    @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
+    private Set<Vehicle> vehicles;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public int getLocationId() {
         return locationId;
@@ -46,6 +56,30 @@ public class Location {
         this.pincode = pincode;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
@@ -53,6 +87,7 @@ public class Location {
                 ", locationName='" + locationName + '\'' +
                 ", address='" + address + '\'' +
                 ", pincode=" + pincode +
+                ", city="+city+
                 '}';
     }
 }
