@@ -3,16 +3,14 @@ package com.updrad.hirewheels;
 import com.updrad.hirewheels.dao.*;
 import com.updrad.hirewheels.entities.*;
 import com.updrad.hirewheels.exceptions.UserAlreadyExistsException;
-import com.updrad.hirewheels.services.AdminService;
-import com.updrad.hirewheels.services.BookingService;
-import com.updrad.hirewheels.services.InitService;
-import com.updrad.hirewheels.services.UsersService;
+import com.updrad.hirewheels.services.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -32,7 +30,7 @@ public class HireWheelsApplication {
 		LocationDao locationDao= context.getBean(LocationDao.class);
 		VehicleDao vehicleDao =context.getBean(VehicleDao.class);
 		BookingService bookingService =context.getBean(BookingService.class);
-
+		VehicleService vehicleService = context.getBean(VehicleService.class);
 
 // adding users to check userServices
 		Users users1 = new Users();
@@ -123,7 +121,7 @@ public class HireWheelsApplication {
 
 		adminService.changeAvailability(vehicle);
 
-// to check booking service
+// to check bookingService
 		Booking booking= new Booking();
 		booking.setBookingDate(LocalDateTime.now());
 		booking.setPickupDate(LocalDateTime.now());
@@ -137,5 +135,10 @@ public class HireWheelsApplication {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());;
 		}
+
+// to test vehicleService
+      List<Vehicle> vehicleList	= vehicleService.getAllVehicles();
+		vehicleList.forEach(System.out::println);
+
 	}
 }
