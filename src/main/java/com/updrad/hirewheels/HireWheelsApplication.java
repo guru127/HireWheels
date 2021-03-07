@@ -4,6 +4,7 @@ import com.updrad.hirewheels.dao.RoleDao;
 import com.updrad.hirewheels.dao.UsersDao;
 import com.updrad.hirewheels.entities.Role;
 import com.updrad.hirewheels.entities.Users;
+import com.updrad.hirewheels.services.InitService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +18,10 @@ public class HireWheelsApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(HireWheelsApplication.class, args);
-		UsersDao usersDao = context.getBean(UsersDao.class);
+		InitService initService= context.getBean(InitService.class);
+		initService.start();
+
+		/*UsersDao usersDao = context.getBean(UsersDao.class);
 		RoleDao roleDao = context.getBean(RoleDao.class);
 
 		Role admin=new Role();
@@ -90,6 +94,6 @@ public class HireWheelsApplication {
 		System.out.println("find by mobile no : ");
 		usersDao.findByMobileNo(889977665)
 				.forEach(users -> System.out.println(users.getFirstName()));
-	}
+*/	}
 
 }

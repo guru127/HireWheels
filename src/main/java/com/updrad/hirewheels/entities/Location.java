@@ -24,6 +24,7 @@ public class Location {
     @JoinColumn(name = "city_id")
     private City city;
 
+
     public int getLocationId() {
         return locationId;
     }

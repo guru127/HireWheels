@@ -10,7 +10,7 @@ public class FuelType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int fuelTypeId;
-    @Column(length = 50,nullable = false,unique = true)
+    @Column(length = 50,unique = true)
     private String fuelType;
 
     @OneToMany(mappedBy = "fuelType")

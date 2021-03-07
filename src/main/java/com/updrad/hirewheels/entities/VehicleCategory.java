@@ -11,7 +11,7 @@ public class VehicleCategory {
     @Column(length = 50,nullable = false,unique = true)
     private  String VehicleCategoryName;
     @OneToMany(mappedBy = "vehicleCategory")
-    private Set<VehicleSubcategory> vehicleSubcategory;
+    private Set<VehicleSubCategory> vehicleSubCategory;
 
     public int getVehicleCategoryId() {
         return vehicleCategoryId;
@@ -29,12 +29,12 @@ public class VehicleCategory {
         VehicleCategoryName = vehicleCategoryName;
     }
 
-    public Set<VehicleSubcategory> getVehicleSubcategory() {
-        return vehicleSubcategory;
+    public Set<VehicleSubCategory> getVehicleSubCategory() {
+        return vehicleSubCategory;
     }
 
-    public void setVehicleSubcategory(Set<VehicleSubcategory> vehicleSubcategory) {
-        this.vehicleSubcategory = vehicleSubcategory;
+    public void setVehicleSubCategory(Set<VehicleSubCategory> vehicleSubCategory) {
+        this.vehicleSubCategory = vehicleSubCategory;
     }
 
     @Override

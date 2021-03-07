@@ -19,10 +19,10 @@ public class Vehicle {
     @Column(length = 500)
     private String vehicleImgUrl;
     @ManyToOne
-    @JoinColumn(name = "vehicle_subcategory")
-    private VehicleSubcategory vehicleSubcategory;
+    @JoinColumn(name = "vehicle_sub_category",nullable = false)
+    private VehicleSubCategory vehicleSubCategory;
     @ManyToOne
-    @JoinColumn(name = "fuel_type")
+    @JoinColumn(name = "fuel_type", nullable = false)
     private FuelType fuelType;
     @ManyToOne
     @JoinColumn(name = "location_id")
@@ -103,12 +103,12 @@ public class Vehicle {
         this.location = location;
     }
 
-    public VehicleSubcategory getVehicleSubcategory() {
-        return vehicleSubcategory;
+    public VehicleSubCategory getVehicleSubcategory() {
+        return vehicleSubCategory;
     }
 
-    public void setVehicleSubcategory(VehicleSubcategory vehicleSubcategory) {
-        this.vehicleSubcategory = vehicleSubcategory;
+    public void setVehicleSubcategory(VehicleSubCategory vehicleSubcategory) {
+        this.vehicleSubCategory = vehicleSubcategory;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Vehicle {
                 ", color='" + color + '\'' +
                 ", availabilityStatus=" + availabilityStatus +
                 ", vehicleImgUrl='" + vehicleImgUrl + '\'' +
-                ", vehicleSubcategory=" + vehicleSubcategory +
+                ", vehicleSubcategory=" + vehicleSubCategory +
                 ", fuelType=" + fuelType +
                 ", location=" + location +
                 '}';

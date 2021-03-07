@@ -13,6 +13,13 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private Set<Users> users;
 
+ /*   public Role(int roleId, String roleName) {
+        this.roleId=roleId;
+        this.roleName=roleNam
+        e;
+    }
+*/
+
     public int getRoleId() {
         return roleId;
     }
