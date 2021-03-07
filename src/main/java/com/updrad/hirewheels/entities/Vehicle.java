@@ -107,8 +107,8 @@ public class Vehicle {
         return vehicleSubCategory;
     }
 
-    public void setVehicleSubcategory(VehicleSubCategory vehicleSubcategory) {
-        this.vehicleSubCategory = vehicleSubcategory;
+    public void setVehicleSubcategory(VehicleSubCategory vehicleSubCategory) {
+        this.vehicleSubCategory = vehicleSubCategory;
     }
 
     @Override
@@ -125,4 +125,5 @@ public class Vehicle {
                 ", location=" + location +
                 '}';
     }
+
 }

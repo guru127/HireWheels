@@ -1,10 +1,12 @@
 package com.updrad.hirewheels;
 
-import com.updrad.hirewheels.dao.RoleDao;
-import com.updrad.hirewheels.dao.UsersDao;
-import com.updrad.hirewheels.entities.Role;
+import com.updrad.hirewheels.dao.*;
+import com.updrad.hirewheels.entities.FuelType;
 import com.updrad.hirewheels.entities.Users;
+import com.updrad.hirewheels.entities.Vehicle;
+import com.updrad.hirewheels.entities.VehicleSubCategory;
 import com.updrad.hirewheels.exceptions.UserAlreadyExistsException;
+import com.updrad.hirewheels.services.AdminService;
 import com.updrad.hirewheels.services.InitService;
 import com.updrad.hirewheels.services.UsersService;
 import org.springframework.boot.SpringApplication;
@@ -12,19 +14,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.util.List;
+
 
 @SpringBootApplication
 @EnableJpaRepositories
 public class HireWheelsApplication {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		ApplicationContext context = SpringApplication.run(HireWheelsApplication.class, args);
 		InitService initService= context.getBean(InitService.class);
 		initService.start();
 		UsersService usersService=context.getBean(UsersService.class);
 		RoleDao roleDao =context.getBean(RoleDao.class);
 		UsersDao users= context.getBean(UsersDao.class);
+		AdminService adminService=context.getBean(AdminService.class);
+		VehicleSubCategoryDao vehicleSubCategoryDao= context.getBean(VehicleSubCategoryDao.class);
+		FuelTypeDao fuelTypeDao= context.getBean(FuelTypeDao.class);
+		LocationDao locationDao= context.getBean(LocationDao.class);
+
+
 // adding users to check userServices
 		Users users1 = new Users();
 		users1.setFirstName("guru");
@@ -99,5 +107,22 @@ public class HireWheelsApplication {
 		}catch (Exception e){
 			System.out.println(e.getMessage());
 		}
+// to check adminService
+		Vehicle vehicle= new Vehicle();
+		vehicle.setVehicleModel("new");
+		vehicle.setVehicleNumber(007);
+		vehicle.setColor("red");
+		vehicle.setAvailabilityStatus(true);
+		vehicle.setVehicleImgUrl("image.url");
+		vehicle.setVehicleSubcategory(vehicleSubCategoryDao.findById(8).get());
+		vehicle.setFuelType(fuelTypeDao.findById(12).get());
+		vehicle.setLocation(locationDao.findById(14).get());
+
+		adminService.registerVehicle(vehicle);
+
+		adminService.changeAvailability(vehicle);
+
+
+
 	}
 }

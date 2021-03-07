@@ -14,10 +14,10 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users createUser(Users users) throws UserAlreadyExistsException {
         if (usersDao.findByEmail(users.getEmail())!=null) {
-            throw new UserAlreadyExistsException("this emailId already exists");
+            throw new UserAlreadyExistsException("Email Already Exists");
         }
         if (usersDao.findByMobileNo(users.getMobileNo())!=null){
-           throw  new UserAlreadyExistsException("Mobile number already exists");
+           throw  new UserAlreadyExistsException("Mobile Number Already Exists");
         }
        return usersDao.save(users);
     }
