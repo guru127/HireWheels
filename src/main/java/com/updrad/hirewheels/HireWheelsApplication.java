@@ -1,12 +1,10 @@
 package com.updrad.hirewheels;
 
 import com.updrad.hirewheels.dao.*;
-import com.updrad.hirewheels.entities.FuelType;
-import com.updrad.hirewheels.entities.Users;
-import com.updrad.hirewheels.entities.Vehicle;
-import com.updrad.hirewheels.entities.VehicleSubCategory;
+import com.updrad.hirewheels.entities.*;
 import com.updrad.hirewheels.exceptions.UserAlreadyExistsException;
 import com.updrad.hirewheels.services.AdminService;
+import com.updrad.hirewheels.services.BookingService;
 import com.updrad.hirewheels.services.InitService;
 import com.updrad.hirewheels.services.UsersService;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.time.LocalDateTime;
 
 
 @SpringBootApplication
@@ -26,11 +25,13 @@ public class HireWheelsApplication {
 		initService.start();
 		UsersService usersService=context.getBean(UsersService.class);
 		RoleDao roleDao =context.getBean(RoleDao.class);
-		UsersDao users= context.getBean(UsersDao.class);
+		UsersDao usersDao= context.getBean(UsersDao.class);
 		AdminService adminService=context.getBean(AdminService.class);
 		VehicleSubCategoryDao vehicleSubCategoryDao= context.getBean(VehicleSubCategoryDao.class);
 		FuelTypeDao fuelTypeDao= context.getBean(FuelTypeDao.class);
 		LocationDao locationDao= context.getBean(LocationDao.class);
+		VehicleDao vehicleDao =context.getBean(VehicleDao.class);
+		BookingService bookingService =context.getBean(BookingService.class);
 
 
 // adding users to check userServices
@@ -122,7 +123,19 @@ public class HireWheelsApplication {
 
 		adminService.changeAvailability(vehicle);
 
-
-
+// to check booking service
+		Booking booking= new Booking();
+		booking.setBookingDate(LocalDateTime.now());
+		booking.setPickupDate(LocalDateTime.now());
+		booking.setDropoffDate(LocalDateTime.now());
+		booking.setAmount(150);
+		booking.setLocation(locationDao.findById(14).get());
+		booking.setUsers(usersDao.findById(17).get());
+		booking.setVehicle(vehicleDao.findById(19).get());
+		try{
+             bookingService.addBooking(booking, users1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());;
+		}
 	}
 }
