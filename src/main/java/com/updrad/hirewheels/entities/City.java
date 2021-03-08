@@ -14,6 +14,7 @@ public class City {
     @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
     private Set<Location> locations;
 
+
     public int getCityId() {
         return cityId;
     }

@@ -39,7 +39,7 @@ public class HireWheelsApplication {
 		users1.setPassword("123456");
 		users1.setWalletMoney(500);
 		users1.setEmail("guru.com");
-		users1.setMobileNo(9988774455l);
+		users1.setMobileNo(99887744555l);
 		users1.setRole(roleDao.findByRoleId(2));
 		try {
 			usersService.createUser(users1);
@@ -119,7 +119,7 @@ public class HireWheelsApplication {
 
 		adminService.registerVehicle(vehicle);
 
-		adminService.changeAvailability(vehicle);
+		//adminService.changeAvailability(vehicle);
 
 // to check bookingService
 		Booking booking= new Booking();
@@ -137,8 +137,10 @@ public class HireWheelsApplication {
 		}
 
 // to test vehicleService
+		System.out.println("vehicle list");
       List<Vehicle> vehicleList	= vehicleService.getAllVehicles();
 		vehicleList.forEach(System.out::println);
-
+		System.out.println("available vehicle");
+		System.out.println(vehicleService.getAvailableVehicles(booking));
 	}
 }
