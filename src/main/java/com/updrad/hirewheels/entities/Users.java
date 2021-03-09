@@ -1,6 +1,7 @@
 package com.updrad.hirewheels.entities;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -111,5 +112,18 @@ public class Users {
                 ", walletMoney=" + walletMoney +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return userId == users.userId && mobileNo == users.mobileNo && walletMoney == users.walletMoney && Objects.equals(firstName, users.firstName) && Objects.equals(lastName, users.lastName) && Objects.equals(password, users.password) && Objects.equals(email, users.email) && Objects.equals(bookings, users.bookings) && Objects.equals(role, users.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, firstName, lastName, password, email, mobileNo, walletMoney, bookings, role);
     }
 }

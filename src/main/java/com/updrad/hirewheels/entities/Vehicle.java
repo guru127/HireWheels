@@ -11,7 +11,7 @@ public class Vehicle {
     @Column(name="vehicle_model", length =50,nullable = false)
     private String vehicleModel;
     @Column(name="vehicle_number", length =10, nullable = false)
-    private long vehicleNumber;
+    private String vehicleNumber;
     @Column(name = "color", length =50, nullable = false)
     private String color;
     @Column(nullable = false)
@@ -46,11 +46,11 @@ public class Vehicle {
         this.vehicleModel = vehicleModel;
     }
 
-    public long getVehicleNumber() {
+    public String getVehicleNumber() {
         return vehicleNumber;
     }
 
-    public void setVehicleNumber(long vehicleNumber) {
+    public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
 
