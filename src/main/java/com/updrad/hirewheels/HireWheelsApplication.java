@@ -4,23 +4,30 @@ import com.updrad.hirewheels.dao.*;
 import com.updrad.hirewheels.entities.*;
 import com.updrad.hirewheels.exceptions.UserAlreadyExistsException;
 import com.updrad.hirewheels.services.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+//spring.datasource.password=guru1996
 @SpringBootApplication
 @EnableJpaRepositories
 public class HireWheelsApplication {
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 	public static void main(String[] args){
 		ApplicationContext context = SpringApplication.run(HireWheelsApplication.class, args);
 		InitService initService= context.getBean(InitService.class);
 		initService.start();
+
 		UsersService usersService=context.getBean(UsersService.class);
 		RoleDao roleDao =context.getBean(RoleDao.class);
 		UsersDao usersDao= context.getBean(UsersDao.class);
@@ -109,7 +116,7 @@ public class HireWheelsApplication {
 // to check adminService
 		Vehicle vehicle= new Vehicle();
 		vehicle.setVehicleModel("new");
-		vehicle.setVehicleNumber(007);
+		vehicle.setVehicleNumber("007");
 		vehicle.setColor("red");
 		vehicle.setAvailabilityStatus(true);
 		vehicle.setVehicleImgUrl("image.url");
@@ -129,7 +136,7 @@ public class HireWheelsApplication {
 		booking.setAmount(150);
 		booking.setLocation(locationDao.findById(14).get());
 		booking.setUsers(usersDao.findById(17).get());
-		booking.setVehicle(vehicleDao.findById(19).get());
+		booking.setVehicle(vehicleDao.findById(vehicle.getVehicleId()).get());
 		try{
              bookingService.addBooking(booking, users1);
 		} catch (Exception e) {
