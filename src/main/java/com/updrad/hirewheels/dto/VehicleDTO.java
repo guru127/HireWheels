@@ -11,7 +11,7 @@ public class VehicleDTO {
     private  boolean availabilityStatus;
     private String vehicleImgUrl;
     private int vehicleSubCategoryId;
-    private FuelType fuelTypeId;
+    private int fuelTypeId;
     private int LocationId;
 
     public int getVehicleId() {
@@ -70,11 +70,11 @@ public class VehicleDTO {
         this.vehicleSubCategoryId = vehicleSubCategoryId;
     }
 
-    public FuelType getFuelTypeId() {
+    public int getFuelTypeId() {
         return fuelTypeId;
     }
 
-    public void setFuelTypeId(FuelType fuelTypeId) {
+    public void setFuelTypeId(int fuelTypeId) {
         this.fuelTypeId = fuelTypeId;
     }
 

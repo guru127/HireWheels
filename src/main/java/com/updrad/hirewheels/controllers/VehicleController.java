@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/HireWheel_app/v1")
+@RequestMapping(value = "/hirewheel/v1")
 public class VehicleController {
 
     @Autowired
@@ -30,6 +30,7 @@ public class VehicleController {
     public String sayHello() {
         return "Hello World To All From VehicleController";
     }
+
     @GetMapping(value = "/Vehicles",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getVehicles(){
         List<Vehicle> vehicleList=vehicleService.getAllVehicles();

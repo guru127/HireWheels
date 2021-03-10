@@ -8,4 +8,6 @@ import java.util.List;
 public interface VehicleService  {
     public List<Vehicle> getAllVehicles();
     public  List<Vehicle> getAvailableVehicles(Booking booking);
+
+    Vehicle getVehicleById(int id);
 }

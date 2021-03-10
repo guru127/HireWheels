@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class VehicleServiceImpl implements VehicleService {
     @Autowired
@@ -30,5 +31,8 @@ public class VehicleServiceImpl implements VehicleService {
             }
         }
         return vehicles;
+    }
+    public Vehicle getVehicleById(int id){
+        return vehicleDao.findById(id).get();
     }
 }
