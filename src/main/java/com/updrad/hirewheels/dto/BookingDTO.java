@@ -8,13 +8,14 @@ import java.time.LocalDateTime;
 
 public class BookingDTO {
     private int bookingId;
+    private int usersId;
     private LocalDateTime bookingDate;
     private LocalDateTime dropoffDate;
     private LocalDateTime pickupDate;
     private int amount;
     private int locationId;
     private int vehicleId;
-    private int usersId;
+
 
     public int getBookingId() {
         return bookingId;

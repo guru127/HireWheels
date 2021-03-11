@@ -2,6 +2,8 @@ package com.updrad.hirewheels.controllers;
 
 import com.updrad.hirewheels.dto.VehicleDTO;
 import com.updrad.hirewheels.entities.Vehicle;
+import com.updrad.hirewheels.exceptions.VehicleDetailsNotFoundException;
+import com.updrad.hirewheels.exceptions.VehicleRegistrationFailedException;
 import com.updrad.hirewheels.services.AdminService;
 import com.updrad.hirewheels.services.VehicleService;
 import org.modelmapper.ModelMapper;
@@ -32,7 +34,7 @@ public class AdminController {
     }
 
     @PostMapping(value="/Vehicles", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity newVehicle(@RequestBody VehicleDTO vehicleDTO) {
+    public ResponseEntity newVehicle(@RequestBody VehicleDTO vehicleDTO) throws VehicleRegistrationFailedException {
         Vehicle newVehicle = modelMapper.map(vehicleDTO, Vehicle.class);
         Vehicle savedVehicle = adminService.registerVehicle(newVehicle);
         VehicleDTO savedVehicleDTO = modelMapper.map(savedVehicle, VehicleDTO.class);
@@ -41,7 +43,7 @@ public class AdminController {
     }
 
     @PutMapping(value = "/Vehicle/{id}")
-    public ResponseEntity changeAvailability(@PathVariable(name = "id") int id) {
+    public ResponseEntity changeAvailability(@PathVariable(name = "id") int id) throws VehicleDetailsNotFoundException {
         Vehicle responseVehicle = vehicleService.getVehicleById(id);
         Vehicle vehicle= adminService.changeAvailability(responseVehicle);
         VehicleDTO responseVehicleDTO = modelMapper.map(vehicle,VehicleDTO.class);

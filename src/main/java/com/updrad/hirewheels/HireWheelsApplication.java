@@ -2,6 +2,7 @@ package com.updrad.hirewheels;
 
 import com.updrad.hirewheels.dao.*;
 import com.updrad.hirewheels.entities.*;
+import com.updrad.hirewheels.exceptions.BookingFailedException;
 import com.updrad.hirewheels.exceptions.UserAlreadyExistsException;
 import com.updrad.hirewheels.services.*;
 import org.modelmapper.ModelMapper;
@@ -23,7 +24,7 @@ public class HireWheelsApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception {
 		ApplicationContext context = SpringApplication.run(HireWheelsApplication.class, args);
 		InitService initService= context.getBean(InitService.class);
 		initService.start();
@@ -139,7 +140,7 @@ public class HireWheelsApplication {
 		booking.setVehicle(vehicleDao.findById(vehicle.getVehicleId()).get());
 		try{
              bookingService.addBooking(booking, users1);
-		} catch (Exception e) {
+		} catch (BookingFailedException e) {
 			System.out.println(e.getMessage());;
 		}
 

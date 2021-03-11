@@ -3,6 +3,8 @@ import com.updrad.hirewheels.dao.*;
 import com.updrad.hirewheels.entities.Booking;
 import com.updrad.hirewheels.entities.Vehicle;
 import com.updrad.hirewheels.entities.VehicleSubCategory;
+import com.updrad.hirewheels.exceptions.VehicleDetailsNotFoundException;
+import com.updrad.hirewheels.exceptions.VehicleRegistrationFailedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -35,7 +37,7 @@ public class VehicleServiceTest {
    public InitService initService;
 
     @Test
-    public  void  tastGetAllVehicles(){
+    public  void  tastGetAllVehicles() throws VehicleRegistrationFailedException {
 
         Vehicle vehicle= new Vehicle();
         vehicle.setVehicleModel("new");
@@ -53,7 +55,7 @@ public class VehicleServiceTest {
         Assertions.assertNotNull(vehicles);
     }
     @Test
-    public  void  testGetAvailableVehicles(){
+    public  void  testGetAvailableVehicles() throws VehicleRegistrationFailedException, VehicleDetailsNotFoundException {
         initService.start();
         Vehicle vehicle= new Vehicle();
         vehicle.setVehicleModel("new");

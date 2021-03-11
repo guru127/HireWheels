@@ -3,6 +3,7 @@ import com.updrad.hirewheels.dao.BookingDao;
 import com.updrad.hirewheels.dao.UsersDao;
 import com.updrad.hirewheels.entities.Booking;
 import com.updrad.hirewheels.entities.Users;
+import com.updrad.hirewheels.exceptions.BookingFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,9 @@ public class BookingSeriviceImpl implements BookingService {
     @Autowired
     public UsersDao usersDao;
     @Override
-    public Booking addBooking(Booking booking, Users users) throws Exception {
+    public Booking addBooking(Booking booking, Users users) throws BookingFailedException {
         if(users.getWalletMoney()<booking.getAmount()){
-            throw  new Exception("Insufficient Balance. Please Check With Admin");
+            throw  new BookingFailedException("Insufficient Balance. Please Check With Admin");
         }
         else{
             users.setWalletMoney(users.getWalletMoney()-booking.getAmount());
