@@ -34,6 +34,7 @@ public class VehicleValidatorImpl implements VehicleValidator{
         if (vehicleDTO.getVehicleNumber() == null || vehicleDTO.getVehicleNumber().length() <= 0){
             throw new APIException("Vehicle number shouldn’t be null or empty’");
         }
+
         if (vehicleDTO.getVehicleImgUrl() == null || vehicleDTO.getVehicleImgUrl().length() <= 0){
             throw new APIException("image url shouldn’t be null or empty’");
         }
