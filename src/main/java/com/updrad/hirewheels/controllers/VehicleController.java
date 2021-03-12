@@ -23,7 +23,7 @@ public class VehicleController {
      @Autowired
     public  ModelMapper modelMapper;
 
-    @GetMapping(value= {"/sayHelloMovie"})
+    @GetMapping(value= "/sayHelloMovie")
     public String sayHello() {
         return "Hello World To All From VehicleController";
     }

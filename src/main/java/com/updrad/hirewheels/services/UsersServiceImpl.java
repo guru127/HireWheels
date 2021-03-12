@@ -20,6 +20,7 @@ public class UsersServiceImpl implements UsersService {
         if (usersDao.findByMobileNo(users.getMobileNo())!=null){
            throw  new UserAlreadyExistsException("Mobile Number Already Exists");
         }
+        users.setWalletMoney(10000); // to set wallet money as default while adding a user
        return usersDao.save(users);
     }
 
@@ -30,7 +31,7 @@ public class UsersServiceImpl implements UsersService {
         }
         Users user = usersDao.findByEmail(emailId);
         if(!user.getPassword().equals(password)){
-            throw new UserDetailsNotFoundException("Unauthorized User");
+            throw new UserDetailsNotFoundException("Invalid Credentials");
         }
         return usersDao.findByEmail(emailId);
     }
