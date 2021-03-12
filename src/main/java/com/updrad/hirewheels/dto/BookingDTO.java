@@ -1,16 +1,21 @@
 package com.updrad.hirewheels.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.updrad.hirewheels.entities.Location;
 import com.updrad.hirewheels.entities.Users;
 import com.updrad.hirewheels.entities.Vehicle;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class BookingDTO {
     private int bookingId;
     private int usersId;
-    private LocalDateTime bookingDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate bookingDate;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS+SS:SS")
     private LocalDateTime dropoffDate;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS+SS:SS")
     private LocalDateTime pickupDate;
     private int amount;
     private int locationId;
@@ -25,11 +30,11 @@ public class BookingDTO {
         this.bookingId = bookingId;
     }
 
-    public LocalDateTime getBookingDate() {
+    public LocalDate getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(LocalDateTime bookingDate) {
+    public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
 
@@ -80,4 +85,5 @@ public class BookingDTO {
     public void setUsersId(int usersId) {
         this.usersId = usersId;
     }
+
 }

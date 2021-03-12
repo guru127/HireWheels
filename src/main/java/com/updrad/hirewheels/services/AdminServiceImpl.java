@@ -2,6 +2,7 @@ package com.updrad.hirewheels.services;
 import com.updrad.hirewheels.dao.VehicleDao;
 import com.updrad.hirewheels.entities.Vehicle;
 import com.updrad.hirewheels.exceptions.VehicleRegistrationFailedException;
+import com.updrad.hirewheels.exceptions.VehicleSatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Vehicle changeAvailability(Vehicle vehicle) {
+    public Vehicle changeAvailability(Vehicle vehicle) throws VehicleSatusException {
         vehicle.setAvailabilityStatus(false);
         return vehicleDao.save(vehicle);
     }

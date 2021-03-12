@@ -6,5 +6,5 @@ import com.updrad.hirewheels.exceptions.BookingFailedException;
 import org.apache.catalina.User;
 
 public interface BookingService {
-    public Booking addBooking (Booking booking, Users users) throws BookingFailedException;
+    public Booking addBooking (Booking booking) throws BookingFailedException;
 }

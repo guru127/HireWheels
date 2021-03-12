@@ -14,8 +14,10 @@ public class BookingSeriviceImpl implements BookingService {
     @Autowired
     public UsersDao usersDao;
     @Override
-    public Booking addBooking(Booking booking, Users users) throws BookingFailedException {
-        if(users.getWalletMoney()<booking.getAmount()){
+    public Booking addBooking(Booking booking) throws BookingFailedException {
+        Users users= booking.getUsers();
+        System.out.println(" booking by user   "+users);
+        if(users.getWalletMoney() < booking.getAmount()){
             throw  new BookingFailedException("Insufficient Balance. Please Check With Admin");
         }
         else{

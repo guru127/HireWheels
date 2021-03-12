@@ -1,6 +1,7 @@
 package com.updrad.hirewheels.entities;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,7 +10,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookingId;
     @Column(nullable = false)
-    private LocalDateTime bookingDate;
+    private LocalDate bookingDate;
     @Column(nullable = false)
     private LocalDateTime dropoffDate;
     @Column(nullable = false)
@@ -51,14 +52,6 @@ public class Booking {
         this.dropoffDate = dropoffDate;
     }
 
-    public LocalDateTime getBookingDate() {
-        return bookingDate;
-    }
-
-    public void setBookingDate(LocalDateTime bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -89,6 +82,14 @@ public class Booking {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public LocalDate getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(LocalDate bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
     @Override

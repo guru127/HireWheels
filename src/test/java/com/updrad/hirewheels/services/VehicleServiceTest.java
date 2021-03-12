@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class VehicleServiceTest {
         adminService.registerVehicle(vehicle);
 
         Booking booking= new Booking();
-        booking.setBookingDate(LocalDateTime.now());
+        booking.setBookingDate(LocalDate.now());
         booking.setPickupDate(LocalDateTime.now());
         booking.setDropoffDate(LocalDateTime.now());
         booking.setAmount(150);

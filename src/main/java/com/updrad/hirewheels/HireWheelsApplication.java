@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -131,7 +132,7 @@ public class HireWheelsApplication {
 
 // to check bookingService
 		Booking booking= new Booking();
-		booking.setBookingDate(LocalDateTime.now());
+		booking.setBookingDate(LocalDate.now());
 		booking.setPickupDate(LocalDateTime.now());
 		booking.setDropoffDate(LocalDateTime.now());
 		booking.setAmount(150);
@@ -139,7 +140,7 @@ public class HireWheelsApplication {
 		booking.setUsers(usersDao.findById(17).get());
 		booking.setVehicle(vehicleDao.findById(vehicle.getVehicleId()).get());
 		try{
-             bookingService.addBooking(booking, users1);
+             bookingService.addBooking(booking);
 		} catch (BookingFailedException e) {
 			System.out.println(e.getMessage());;
 		}

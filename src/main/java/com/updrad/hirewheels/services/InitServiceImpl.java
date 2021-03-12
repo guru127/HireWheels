@@ -25,9 +25,7 @@ public class InitServiceImpl implements InitService {
     public FuelTypeDao fuelTypeDao;
     @Autowired
     public LocationDao locationDao;
-    //@Autowired
-    //DTOEntityConveter dtoEntityConveter;
-    
+
     @Override
     public void start() {
           addUserRole();

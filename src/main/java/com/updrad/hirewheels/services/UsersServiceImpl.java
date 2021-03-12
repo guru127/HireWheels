@@ -35,4 +35,9 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.findByEmail(emailId);
     }
 
+    @Override
+    public Users getUserByID(int id) throws UserDetailsNotFoundException{
+        return usersDao.findById(id).get();
+    }
+
 }

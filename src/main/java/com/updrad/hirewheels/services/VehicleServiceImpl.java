@@ -36,4 +36,5 @@ public class VehicleServiceImpl implements VehicleService {
     public Vehicle getVehicleById(int id) throws VehicleDetailsNotFoundException {
         return vehicleDao.findById(id).get();
     }
+
 }
