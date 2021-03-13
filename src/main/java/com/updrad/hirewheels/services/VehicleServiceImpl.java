@@ -61,7 +61,6 @@ public class VehicleServiceImpl implements VehicleService {
                 }
             }
         }
-        }
         return vehicleList;
     }
 }

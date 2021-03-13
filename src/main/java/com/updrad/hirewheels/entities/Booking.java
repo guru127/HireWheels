@@ -25,8 +25,23 @@ public class Booking {
     @JoinColumn(name = "vehicle_id",nullable = false)
     private Vehicle vehicle;
     @ManyToOne
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "users_id")
     private Users users;
+
+    public Booking() {
+    }
+
+    public Booking(int bookingId, LocalDate bookingDate, LocalDateTime dropoffDate, LocalDateTime pickupDate, int amount,
+                   Location location, Vehicle vehicle, Users users) {
+        this.bookingId = bookingId;
+        this.bookingDate = bookingDate;
+        this.dropoffDate = dropoffDate;
+        this.pickupDate = pickupDate;
+        this.amount = amount;
+        this.location = location;
+        this.vehicle = vehicle;
+        this.users = users;
+    }
 
     public int getBookingId() {
         return bookingId;

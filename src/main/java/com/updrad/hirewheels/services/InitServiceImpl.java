@@ -4,9 +4,6 @@ import com.updrad.hirewheels.dao.*;
 import com.updrad.hirewheels.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -38,123 +35,53 @@ public class InitServiceImpl implements InitService {
     }
 
     private void addVehicleCategory() {
-        VehicleCategory vehicleCategory1= new VehicleCategory();
-        vehicleCategory1.setVehicleCategoryId(10);
-        vehicleCategory1.setVehicleCategoryName("CAR");
-
-        VehicleCategory vehicleCategory2= new VehicleCategory();
-        vehicleCategory2.setVehicleCategoryId(11);
-        vehicleCategory2.setVehicleCategoryName("BIKE");
+        VehicleCategory vehicleCategory1= new VehicleCategory(10, "CAR");
+        VehicleCategory vehicleCategory2 = new VehicleCategory(11, "BIKE");
 
         vehicleCategoryDao.saveAll(List.of(vehicleCategory1,vehicleCategory2));
     }
 
     private void addUser() {
-        Users users1 = new Users();
-        users1.setFirstName("Upgrad");
-        users1.setLastName("Admin");
-        users1.setPassword("admin@123");
-        users1.setEmail("upgrad@gmail.com");
-        users1.setMobileNo(9999999999l);
-        users1.setWalletMoney(10000);
-        users1.setRole(userRoleDao.findByRoleId(1));
-        usersDao.save(users1);
+        Users user = new Users(1,"Upgrad",  "Admin", "admin@123","upgrad@gmail.com",
+                9999999999l,10000, userRoleDao.findByRoleId(1));
+        usersDao.save(user);
     }
 
     private void addUserRole() {
-        Role admin = new Role();
-        admin.setRoleName("Admin");
+        Role admin = new Role(1, "Admin");
          userRoleDao.save(admin);
-
-        Role user = new Role();
-        user.setRoleName("User");
+        Role user = new Role(2, "User");
          userRoleDao.save(user);
     }
 
     private void addVehicleSubCategory() {
+       VehicleSubCategory vehicleSubCategory = new VehicleSubCategory(1, "SUV", vehicleCategoryDao.findByVehicleCategoryId(11), 300);
+       VehicleSubCategory vehicleSubCategory1= new VehicleSubCategory(2, "SEDAN", vehicleCategoryDao.findByVehicleCategoryId(11),350);
+       VehicleSubCategory  vehicleSubCategory2=new VehicleSubCategory(3, "HATCHBACK", vehicleCategoryDao.findByVehicleCategoryId(10),250);
+       VehicleSubCategory vehicleSubCategory3= new VehicleSubCategory(4, "CRUISER", vehicleCategoryDao.findByVehicleCategoryId(12),200);
+       VehicleSubCategory vehicleSubCategory4= new VehicleSubCategory(5, "DIRT bIKE",vehicleCategoryDao.findByVehicleCategoryId(12),200);
+       VehicleSubCategory vehicleSubCategory5= new VehicleSubCategory(6, "SPORTS BIKE", vehicleCategoryDao.findByVehicleCategoryId(12),150);
 
-    VehicleSubCategory vehicleSubCategory1= new VehicleSubCategory();
-    vehicleSubCategory1.setVehicleSubCategoryId(1);
-    vehicleSubCategory1.setVehicleSubCategoryName("SUV");
-    vehicleSubCategory1.setPricePerDay(300);
-    vehicleSubCategory1.setVehicleCategory(vehicleCategoryDao.findByVehicleCategoryId(4));
-
-    VehicleSubCategory vehicleSubCategory2= new VehicleSubCategory();
-    vehicleSubCategory2.setVehicleSubCategoryId(2);
-    vehicleSubCategory2.setVehicleSubCategoryName("SEDAN");
-    vehicleSubCategory2.setPricePerDay(350);
-    vehicleSubCategory2.setVehicleCategory(vehicleCategoryDao.findByVehicleCategoryId(4));
-
-    VehicleSubCategory vehicleSubCategory3= new VehicleSubCategory();
-    vehicleSubCategory3.setVehicleSubCategoryId(3);
-    vehicleSubCategory3.setVehicleSubCategoryName("HATCHBACK");
-    vehicleSubCategory3.setPricePerDay(250);
-    vehicleSubCategory3.setVehicleCategory(vehicleCategoryDao.findByVehicleCategoryId(4));
-
-    VehicleSubCategory vehicleSubCategory4= new VehicleSubCategory();
-    vehicleSubCategory4.setVehicleSubCategoryId(4);
-    vehicleSubCategory4.setVehicleSubCategoryName("CRUISER");
-    vehicleSubCategory4.setPricePerDay(200);
-    vehicleSubCategory4.setVehicleCategory(vehicleCategoryDao.findByVehicleCategoryId(5));
-
-    VehicleSubCategory vehicleSubCategory5= new VehicleSubCategory();
-    vehicleSubCategory5.setVehicleSubCategoryId(5);
-    vehicleSubCategory5.setVehicleSubCategoryName("DIRT BIKE");
-    vehicleSubCategory5.setPricePerDay(200);
-    vehicleSubCategory5.setVehicleCategory(vehicleCategoryDao.findByVehicleCategoryId(5));
-
-    VehicleSubCategory vehicleSubCategory6= new VehicleSubCategory();
-    vehicleSubCategory6.setVehicleSubCategoryId(6);
-    vehicleSubCategory6.setVehicleSubCategoryName("SPORTS BIKE");
-    vehicleSubCategory6.setPricePerDay(150);
-    vehicleSubCategory6.setVehicleCategory(vehicleCategoryDao.findByVehicleCategoryId(5));
-
-
-        vehicleSubCategoryDao.saveAll(List.of(vehicleSubCategory1, vehicleSubCategory2,
-                vehicleSubCategory3,vehicleSubCategory4, vehicleSubCategory5,vehicleSubCategory6));
+       vehicleSubCategoryDao.saveAll(List.of(vehicleSubCategory, vehicleSubCategory1, vehicleSubCategory2, vehicleSubCategory3,vehicleSubCategory4, vehicleSubCategory5,vehicleSubCategory5));
     }
 
     private void addCity() {
-        City city = new City();
-        city.setCityId(1);
-        city.setCityName("Mumbai");
-       cityDao.save(city);
+        City city = new City(1,"Mumbai");
+        cityDao.save(city);
     }
 
     private void addFuelType() {
-
-        FuelType fuelType1= new FuelType();
-        fuelType1.setFuelTypeId(1);
-        fuelType1.setFuelType("Petrol");
-
-        FuelType fuelType2 =new FuelType();
-        fuelType2.setFuelTypeId(2);
-        fuelType1.setFuelType("Diesel");
+        FuelType fuelType1= new FuelType(1,"Petrol");
+        FuelType fuelType2 =new FuelType(2,"Diesel");
 
         fuelTypeDao.saveAll(List.of(fuelType1,fuelType2));;
     }
 
     private void addLocation() {
 
-        Location location1=new Location();
-        location1.setLocationId(1);
-        location1.setLocationName("Worli");
-        location1.setAddress("Dr E Moses Rd, Worli Naka, Upper Worli");
-        location1.setPincode(400018);
-       location1.setCity(cityDao.findById(11).get());
-
-        Location location2=new Location();
-        location2.setLocationId(2);
-        location2.setLocationName("Chembur");
-        location2.setAddress("Optic Complex");
-       location2.setPincode(400019);
-       location2.setCity(cityDao.findById(11).get());
-
-        Location location3=new Location();
-        location3.setLocationId(3);
-        location3.setLocationName("Powai");
-        location3.setAddress("Hiranandani Tower");
-        location3.setPincode(400020);
-        location3.setCity(cityDao.findById(11).get());
+        Location location1=new Location(1,"Worli", "Dr E Moses Rd, Worli Naka, Upper Worli",400018, cityDao.findById(11).get());
+        Location location2=new Location(2,"Chembur","Optic Complex", 400019, cityDao.findById(11).get());
+        Location location3=new Location(3,"Powai","Hiranandani Tower",400020, cityDao.findById(11).get());
         locationDao.saveAll(List.of(location1, location2, location3));
-}}
+    }
+}

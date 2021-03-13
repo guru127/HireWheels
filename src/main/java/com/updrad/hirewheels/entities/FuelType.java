@@ -19,10 +19,10 @@ public class FuelType {
     public FuelType() {
     }
 
-    public FuelType(int fuelTypeId, String fuelType, Set<Vehicle> vehicles) {
+    public FuelType(int fuelTypeId, String fuelType) {
         this.fuelTypeId = fuelTypeId;
         this.fuelType = fuelType;
-        this.vehicles = vehicles;
+
     }
 
     public int getFuelTypeId() {

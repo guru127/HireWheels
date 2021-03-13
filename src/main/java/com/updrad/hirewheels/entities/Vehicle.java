@@ -30,6 +30,22 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle", fetch = FetchType.EAGER)
     private Set<Booking> bookings;
 
+    public Vehicle() {
+    }
+    public Vehicle(int vehicleId, String vehicleModel, String vehicleNumber, String color, boolean availabilityStatus, String vehicleImgUrl,
+                   VehicleSubCategory vehicleSubCategory, FuelType fuelType, Location location, Set<Booking> bookings) {
+        this.vehicleId = vehicleId;
+        this.vehicleModel = vehicleModel;
+        this.vehicleNumber = vehicleNumber;
+        this.color = color;
+        this.availabilityStatus = availabilityStatus;
+        this.vehicleImgUrl = vehicleImgUrl;
+        this.vehicleSubCategory = vehicleSubCategory;
+        this.fuelType = fuelType;
+        this.location = location;
+        this.bookings = bookings;
+    }
+
     public int getVehicleId() {
         return vehicleId;
     }

@@ -24,6 +24,17 @@ public class Location {
     @JoinColumn(name = "city_id")
     private City city;
 
+    public Location() {
+    }
+
+    public Location(int locationId, String locationName, String address, int pincode, City city) {
+        this.locationId = locationId;
+        this.locationName = locationName;
+        this.address = address;
+        this.pincode = pincode;
+        this.city = city;
+    }
+
     public int getLocationId() {
         return locationId;
     }
