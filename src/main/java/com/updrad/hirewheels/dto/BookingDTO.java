@@ -81,7 +81,6 @@ public class BookingDTO {
     public int getUsersId() {
         return usersId;
     }
-
     public void setUsersId(int usersId) {
         this.usersId = usersId;
     }

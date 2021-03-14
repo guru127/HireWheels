@@ -28,7 +28,9 @@ public class BookingController {
     @PostMapping(value = "/bookings", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity newBooking(@RequestBody BookingDTO bookingDTO) throws Exception {
         bookingValidator.validateBooking(bookingDTO);
+        System.out.println("S*******************"+bookingDTO.getUsersId());
         Booking newBooking = modelMapper.map(bookingDTO, Booking.class);
+        System.out.println("******************"+newBooking.getUsers());
         Booking savedBooking= bookingService.addBooking(newBooking);
         //Booking savedBooking= bookingService.addBooking(newBooking, usersService.getUserByID(bookingDTO.getUsersId()) );
         BookingDTO savedBookingDTO = modelMapper.map(savedBooking,BookingDTO.class);

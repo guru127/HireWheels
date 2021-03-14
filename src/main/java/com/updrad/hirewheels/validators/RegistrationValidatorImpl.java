@@ -1,5 +1,6 @@
 package com.updrad.hirewheels.validators;
 
+import com.updrad.hirewheels.dto.LoginDTO;
 import com.updrad.hirewheels.dto.UsersDTO;
 import com.updrad.hirewheels.entities.Users;
 import com.updrad.hirewheels.exceptions.APIException;
@@ -17,6 +18,15 @@ public class RegistrationValidatorImpl implements RegistrationValidator{
         }
         if(String.valueOf(usersDTO.getMobileNo()).length()!=10){
             throw new APIException("Mobile Number cannot be null or empty and must be 10 digits");
+        }
+    }
+
+    public void validateUserLogin(LoginDTO user) throws APIException {
+        if (user.getUsername() == null || user.getUsername().length() <= 0) {
+            throw new APIException("Invalid username");
+        }
+        if(user.getPassword() == null || user.getPassword().length() <= 0   ) {
+            throw new APIException("Invalid password");
         }
     }
 }

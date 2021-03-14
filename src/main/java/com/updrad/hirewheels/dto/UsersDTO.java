@@ -2,7 +2,7 @@ package com.updrad.hirewheels.dto;
 import java.util.Set;
 
 public class UsersDTO {
-    private int userId;
+    private int usersId;
     private String firstName;
     private String lastName;
     private String password;
@@ -13,11 +13,11 @@ public class UsersDTO {
     private int roleId;
 
     public int getUserId() {
-        return userId;
+        return usersId;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.usersId = userId;
     }
 
     public String getFirstName() {

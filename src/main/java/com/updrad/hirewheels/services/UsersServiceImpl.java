@@ -38,7 +38,19 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Users getUserByID(int id) throws UserDetailsNotFoundException{
-        return usersDao.findById(id).get();
+        Users user =usersDao.findById(id).get();
+        if (user==null){
+            throw  new UserDetailsNotFoundException(" user not found for given Id");
+        }
+        return user;
     }
 
+    @Override
+    public Users getUserByUserName(String userName) throws UserDetailsNotFoundException {
+        Users user = usersDao.findByEmail(userName);
+        if (user == null) {
+            throw new UserDetailsNotFoundException(" user not found for given email");
+        }
+        return user;
+    }
 }

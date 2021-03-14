@@ -1,9 +1,11 @@
 package com.updrad.hirewheels.controllers;
 
 import com.updrad.hirewheels.dto.BookingDTO;
+import com.updrad.hirewheels.dto.LoginDTO;
 import com.updrad.hirewheels.dto.UsersDTO;
 import com.updrad.hirewheels.entities.Booking;
 import com.updrad.hirewheels.entities.Users;
+import com.updrad.hirewheels.exceptions.APIException;
 import com.updrad.hirewheels.exceptions.UserDetailsNotFoundException;
 import com.updrad.hirewheels.services.UsersService;
 import com.updrad.hirewheels.validators.RegistrationValidator;
@@ -13,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/hirewheels/v1")
@@ -30,7 +35,7 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/users",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity newUser(@RequestBody UsersDTO usersDTO) throws Exception {
+    public ResponseEntity signup(@RequestBody UsersDTO usersDTO) throws Exception {
         registrationValidator.ValidateNewUser(usersDTO);
         Users user = modelMapper.map(usersDTO, Users.class);
         Users savedUser = usersService.createUser(user);
@@ -38,9 +43,13 @@ public class AuthenticationController {
     }
 
     @GetMapping(value = "/users",consumes = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity getUser(@RequestParam(value = "emailId") String emailId, @RequestParam(value = "password") String password) throws UserDetailsNotFoundException {
-        Users users = usersService.getUser(emailId, password);
+    public ResponseEntity Login(@RequestBody LoginDTO loginDTO) throws UserDetailsNotFoundException, APIException {
+        registrationValidator.validateUserLogin(loginDTO);
+        Users users = usersService.getUser(loginDTO.getUsername(), loginDTO.getPassword());
         UsersDTO responseUser= modelMapper.map(users, UsersDTO.class);
-        return new ResponseEntity<>(responseUser,  HttpStatus.FOUND);
+        Map<String, String> model= new HashMap<>();
+        model.put("message :", "login successfully");
+        model.put("token",users.getEmail());
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 }
