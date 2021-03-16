@@ -2,11 +2,13 @@ package com.updrad.hirewheels.controllers;
 
 import com.updrad.hirewheels.dto.BookingDTO;
 import com.updrad.hirewheels.dto.LoginDTO;
+import com.updrad.hirewheels.dto.ResponseDTO;
 import com.updrad.hirewheels.dto.UsersDTO;
 import com.updrad.hirewheels.entities.Booking;
 import com.updrad.hirewheels.entities.Users;
 import com.updrad.hirewheels.exceptions.APIException;
 import com.updrad.hirewheels.exceptions.UserDetailsNotFoundException;
+import com.updrad.hirewheels.exceptions.UserRegistrationFailedException;
 import com.updrad.hirewheels.services.UsersService;
 import com.updrad.hirewheels.validators.RegistrationValidator;
 import org.modelmapper.ModelMapper;
@@ -16,8 +18,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/hirewheels/v1")
@@ -39,7 +43,17 @@ public class AuthenticationController {
         registrationValidator.ValidateNewUser(usersDTO);
         Users user = modelMapper.map(usersDTO, Users.class);
         Users savedUser = usersService.createUser(user);
-        return new ResponseEntity<>("User Successfully Signed Up", HttpStatus.CREATED);
+        if (Objects.nonNull(savedUser)){
+            ResponseDTO responseDTO = new ResponseDTO();
+            responseDTO.setTimeStamp(LocalDateTime.now());
+            responseDTO.setMessage("User Successfully Signed Up");
+            responseDTO.setStatusCode(HttpStatus.CREATED.value());
+
+            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+        }else {
+            throw new UserRegistrationFailedException("User  registration failed");
+        }
+
     }
 
     @GetMapping(value = "/users",consumes = MediaType.APPLICATION_JSON_VALUE )

@@ -1,6 +1,8 @@
 package com.updrad.hirewheels.controllers;
 
+import com.updrad.hirewheels.dto.ResponseDTO;
 import com.updrad.hirewheels.dto.VehicleDTO;
+import com.updrad.hirewheels.entities.Users;
 import com.updrad.hirewheels.entities.Vehicle;
 import com.updrad.hirewheels.exceptions.*;
 import com.updrad.hirewheels.services.AdminService;
@@ -15,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/hirewheels/v1")
@@ -39,16 +44,30 @@ public class AdminController {
         if (token==null){
             throw new APIException("Please add proper authentication");
         }
-        if(!usersService.getUserByUserName(token).getRole().getRoleName().equalsIgnoreCase("Admin")){
-            throw new NotAuthorisedException("Unauthorized. Only 'Admin' can access this API");
+        Users user1= usersService.getUserByUserName(token);
+        if(Objects.nonNull(user1)){
+            if(!usersService.getUserByUserName(token).getRole().getRoleName().equalsIgnoreCase("Admin")){
+                throw new NotAuthorisedException("Unauthorized. Only 'Admin' can access this API");
+            }
+        }else {
+            throw new UserDetailsNotFoundException("user deatails not found for the token");
         }
         vehicleValidator.validateVehicle(vehicleDTO);
         Vehicle newVehicle = modelMapper.map(vehicleDTO, Vehicle.class);;
         Vehicle savedVehicle = adminService.registerVehicle(newVehicle);
         VehicleDTO savedVehicleDTO = modelMapper.map(savedVehicle, VehicleDTO.class);
-        logger.debug("adding new vehicle : "+ savedVehicleDTO);
-        return new ResponseEntity<>(savedVehicleDTO, HttpStatus.CREATED);
+        if (Objects.nonNull(savedVehicleDTO)){
+            ResponseDTO responseDTO = new ResponseDTO();
+            responseDTO.setTimeStamp(LocalDateTime.now());
+            responseDTO.setMessage("Vehicle Added Successfully");
+            responseDTO.setStatusCode(200);
+            logger.debug("adding new vehicle : "+ savedVehicleDTO);
+            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+        }else {
+            throw new VehicleRegistrationFailedException("vehicle registration failed ");
+        }
     }
+
 
     @PutMapping(value = "/Vehicle/{id}")
     public ResponseEntity changeAvailability(@PathVariable(name = "id") int id, @RequestHeader (value = "ACCESS-TOKEN") String token)
@@ -62,7 +81,16 @@ public class AdminController {
         Vehicle responseVehicle = vehicleService.getVehicleById(id);
         Vehicle vehicle= adminService.changeAvailability(responseVehicle);
         VehicleDTO responseVehicleDTO = modelMapper.map(vehicle,VehicleDTO.class);
-        logger.debug("changing availability status : "+responseVehicleDTO);
-        return new ResponseEntity<>(responseVehicleDTO, HttpStatus.OK);
+        if (responseVehicleDTO.isAvailabilityStatus()==false){
+            logger.debug("changing availability status : "+responseVehicleDTO);
+            ResponseDTO responseDTO= new ResponseDTO();
+            responseDTO.setTimeStamp(LocalDateTime.now());
+            responseDTO.setMessage("Activity Performed Successfully");
+            responseDTO.setStatusCode(200);
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        }else {
+            throw new VehicleSatusException("Changing Vehicle Status failed");
+        }
+
     }
 }

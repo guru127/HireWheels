@@ -8,7 +8,7 @@ import java.util.List;
 public interface UsersDao extends JpaRepository<Users, Integer> {
 
     public List<Users> findByFirstName(String firstName);
-    public Users findByEmail(String email);
+    public Users findByEmail(String emailId);
     public Users findByMobileNo(long mobileNo);
     public List<Users> findByFirstNameOrLastName(String firstName, String lastName);
 

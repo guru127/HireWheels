@@ -44,21 +44,19 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleDao.findById(id).get();
     }
 
-
     public List<Vehicle> getAvailableVehicle(int categoryId, LocalDateTime pickUpDate, LocalDateTime dropDate, int locationId) {
         List<Vehicle> vehicles = vehicleDao.findAll();
         List<Vehicle> vehicleList = new ArrayList<>();
-
         List<Booking> bookingList = bookingDao.findAll();
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getVehicleSubcategory().getVehicleSubCategoryId() == categoryId
-                    && vehicle.getLocation().getLocationId() == locationId) {
+                    && vehicle.getLocation().getLocationId() == locationId && vehicle.isAvailabilityStatus()==true){
                 for (Booking booking : bookingList) {
                     if (booking.getVehicle().getVehicleId() == vehicle.getVehicleId()
                             && (booking.getPickupDate().isEqual(pickUpDate) || booking.getDropoffDate().isEqual(dropDate))) {
-                        vehicleList.add(vehicle);
                     }
                 }
+                vehicleList.add(vehicle);
             }
         }
         return vehicleList;

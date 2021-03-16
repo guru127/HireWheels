@@ -21,7 +21,6 @@ public class BookingDTO {
     private int locationId;
     private int vehicleId;
 
-
     public int getBookingId() {
         return bookingId;
     }

@@ -7,6 +7,8 @@ import com.updrad.hirewheels.exceptions.UserDetailsNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsersServiceImpl implements UsersService {
     @Autowired
@@ -47,10 +49,10 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Users getUserByUserName(String userName) throws UserDetailsNotFoundException {
-        Users user = usersDao.findByEmail(userName);
+        Optional<Users> user = Optional.ofNullable(usersDao.findByEmail(userName));
         if (user == null) {
             throw new UserDetailsNotFoundException(" user not found for given email");
         }
-        return user;
+        return usersDao.findByEmail(userName);
     }
 }

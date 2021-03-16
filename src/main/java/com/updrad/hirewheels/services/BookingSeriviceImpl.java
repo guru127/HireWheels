@@ -16,7 +16,6 @@ public class BookingSeriviceImpl implements BookingService {
     @Override
     public Booking addBooking(Booking booking) throws BookingFailedException {
         Users users= booking.getUsers();
-        System.out.println(" booking by user   "+users);
         if(users.getWalletMoney() < booking.getAmount()){
             throw  new BookingFailedException("Insufficient Balance. Please Check With Admin");
         }
