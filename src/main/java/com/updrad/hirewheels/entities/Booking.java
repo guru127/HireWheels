@@ -31,12 +31,12 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(int bookingId, LocalDate bookingDate, LocalDateTime dropoffDate, LocalDateTime pickupDate, int amount,
+    public Booking(int bookingId, LocalDate bookingDate,  LocalDateTime pickupDate,LocalDateTime dropoffDate, int amount,
                    Location location, Vehicle vehicle, Users users) {
         this.bookingId = bookingId;
         this.bookingDate = bookingDate;
-        this.dropoffDate = dropoffDate;
         this.pickupDate = pickupDate;
+        this.dropoffDate = dropoffDate;
         this.amount = amount;
         this.location = location;
         this.vehicle = vehicle;

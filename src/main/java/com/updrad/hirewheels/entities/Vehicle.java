@@ -33,7 +33,7 @@ public class Vehicle {
     public Vehicle() {
     }
     public Vehicle(int vehicleId, String vehicleModel, String vehicleNumber, String color, boolean availabilityStatus, String vehicleImgUrl,
-                   VehicleSubCategory vehicleSubCategory, FuelType fuelType, Location location, Set<Booking> bookings) {
+                   VehicleSubCategory vehicleSubCategory, FuelType fuelType, Location location) {
         this.vehicleId = vehicleId;
         this.vehicleModel = vehicleModel;
         this.vehicleNumber = vehicleNumber;
@@ -43,7 +43,6 @@ public class Vehicle {
         this.vehicleSubCategory = vehicleSubCategory;
         this.fuelType = fuelType;
         this.location = location;
-        this.bookings = bookings;
     }
 
     public int getVehicleId() {
