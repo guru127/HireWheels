@@ -11,12 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//spring.datasource.password=guru1996
+
 @SpringBootApplication
 @EnableJpaRepositories
 public class HireWheelsApplication {
@@ -25,6 +24,8 @@ public class HireWheelsApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
+
+
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = SpringApplication.run(HireWheelsApplication.class, args);
 		InitService initService= context.getBean(InitService.class);

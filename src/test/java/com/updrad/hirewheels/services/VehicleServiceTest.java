@@ -1,20 +1,15 @@
 package com.updrad.hirewheels.services;
 import com.updrad.hirewheels.dao.*;
 import com.updrad.hirewheels.entities.*;
-import com.updrad.hirewheels.exceptions.VehicleDetailsNotFoundException;
-import com.updrad.hirewheels.exceptions.VehicleRegistrationFailedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +20,6 @@ public class VehicleServiceTest {
     private VehicleDao vehicleDao;
     @Mock
     public BookingDao bookingDao;
-    @Mock
-    public LocationDao locationDao;
-    @Mock
-    public VehicleSubCategoryDao vehicleSubCategoryDao;
 
     @InjectMocks
     private VehicleServiceImpl vehicleService;

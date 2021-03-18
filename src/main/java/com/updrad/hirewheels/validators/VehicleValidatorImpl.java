@@ -3,13 +3,10 @@ package com.updrad.hirewheels.validators;
 import com.updrad.hirewheels.dao.LocationDao;
 import com.updrad.hirewheels.dto.VehicleDTO;
 import com.updrad.hirewheels.entities.Location;
-import com.updrad.hirewheels.entities.VehicleSubCategory;
 import com.updrad.hirewheels.exceptions.APIException;
 import com.updrad.hirewheels.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
